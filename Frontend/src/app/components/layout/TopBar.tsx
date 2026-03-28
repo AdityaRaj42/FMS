@@ -54,10 +54,10 @@ export function TopBar({ breadcrumb, notifCount = 3, onSearchClick }: TopBarProp
         </div>
         <div>
           <div style={{ fontSize: 13, fontWeight: 700, color: "#fff", letterSpacing: "0.02em", lineHeight: 1 }}>
-            NEXUS<span style={{ color: "#00A8FF" }}>FM</span>
+            Enabler.in
           </div>
           <div style={{ fontSize: 9, color: "rgba(0,168,255,0.7)", letterSpacing: "0.12em", textTransform: "uppercase", lineHeight: 1.2 }}>
-            AI Command
+            AI Command Center
           </div>
         </div>
       </div>

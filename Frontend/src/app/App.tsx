@@ -89,7 +89,7 @@ export default function App() {
       <TopBar
         breadcrumb={config.breadcrumb}
         notifCount={drawerOpen ? 0 : 3}
-        onSearchClick={() => {}}
+        onSearchClick={() => { }}
       />
 
       {/* Main area */}
