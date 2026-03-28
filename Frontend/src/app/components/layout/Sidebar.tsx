@@ -46,7 +46,7 @@ export function Sidebar({ activeItem, onNavigate }: SidebarProps) {
         style={{
           position: "absolute",
           top: 12,
-          right: -12,
+          right: 15,
           width: 24,
           height: 24,
           background: "#0D1829",
@@ -57,14 +57,14 @@ export function Sidebar({ activeItem, onNavigate }: SidebarProps) {
           alignItems: "center",
           justifyContent: "center",
           color: "rgba(0,168,255,0.7)",
-          zIndex: 10,
+          zIndex: 50,
         }}
       >
         {expanded ? <ChevronLeft size={12} /> : <ChevronRight size={12} />}
       </button>
 
       {/* Nav items */}
-      <nav style={{ flex: 1, padding: "16px 8px", display: "flex", flexDirection: "column", gap: 2 }}>
+      <nav className="" style={{ paddingTop: "37px", flex: 1, padding: "16px 8px", display: "flex", flexDirection: "column", gap: 2 }}>
         {navItems.map(({ icon: Icon, label, id }) => {
           const isActive = activeItem === id;
           return (
