@@ -24,16 +24,43 @@ export function WorkforceHeatmap() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${API}/dashboard/heatmap`)
-      .then((r) => r.json())
-      .then((data) => {
-        if (data.data) setHeatmapData(data.data);
-        if (data.days) setDays(data.days);
-        if (data.shifts) setShifts(data.shifts);
-        if (data.stats) setStats(data.stats);
-      })
-      .catch(() => { })
-      .finally(() => setLoading(false));
+    // fetch(`${API}/dashboard/heatmap`)
+    //   .then((r) => r.json())
+    //   .then((data) => {
+    //     if (data.data) setHeatmapData(data.data);
+    //     if (data.days) setDays(data.days);
+    //     if (data.shifts) setShifts(data.shifts);
+    //     if (data.stats) setStats(data.stats);
+    //   })
+    //   .catch(() => { })
+    //   .finally(() => setLoading(false));
+
+    const dummyData = {
+      days: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      shifts: [
+        "AM 06-10",
+        "PM 10-14",
+        "PM 14-18",
+        "PM 18-22",
+        "PM 22-02",
+        "PM 02-06"
+      ],
+      data: [
+        [60, 55, 65, 60, 65, 50, 40],   // 00:00 - 04:00
+        [85, 80, 88, 85, 80, 60, 45],   // 04:00 - 08:00
+        [95, 40, 85, 92, 88, 75, 60],   // 08:00 - 12:00
+        [90, 85, 95, 88, 85, 70, 55],   // 12:00 - 16:00
+        [80, 85, 90, 85, 80, 30, 10],   // 16:00 - 20:00
+        [70, 75, 80, 75, 70, 65, 5]     // 20:00 - 00:00
+      ],
+      stats: { avgFill: 71.5, criticalGaps: 4, peakShift: 95 }
+    };
+
+    setDays(dummyData.days);
+    setShifts(dummyData.shifts);
+    setHeatmapData(dummyData.data);
+    setStats(dummyData.stats);
+    setLoading(false);
   }, []);
 
   if (loading) {
