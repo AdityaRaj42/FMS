@@ -57,7 +57,7 @@ export function TopBar({ breadcrumb, notifCount = 3, onSearchClick }: TopBarProp
             Enabler.in
           </div>
           <div style={{ fontSize: 9, color: "rgba(0,168,255,0.7)", letterSpacing: "0.12em", textTransform: "uppercase", lineHeight: 1.2 }}>
-            AI Command Center
+            AI Command Centre
           </div>
         </div>
       </div>
