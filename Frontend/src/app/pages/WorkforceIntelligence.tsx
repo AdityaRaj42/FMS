@@ -3,7 +3,7 @@ import { ScatterChart, Scatter, XAxis, YAxis, ZAxis, Tooltip, ResponsiveContaine
 
 import { LoadingSkeleton } from "../components/ui/LoadingSkeleton";
 
-const API = "http://localhost:8000/api/v1";
+const API = "/api/v1";
 
 const CustomTooltip = ({ active, payload }: any) => {
   if (active && payload && payload.length) {
@@ -34,7 +34,7 @@ export function WorkforceIntelligence() {
         if (d.nodes?.length) setGraphNodes(d.nodes);
         if (d.edges?.length) setGraphEdges(d.edges);
       }),
-    ]).catch(() => {}).finally(() => setLoading(false));
+    ]).catch(() => { }).finally(() => setLoading(false));
   }, []);
 
   function getNodePos(id: string) {
@@ -352,7 +352,7 @@ export function WorkforceIntelligence() {
                 );
               })}
             </svg>
-            
+
             {graphNodes.length === 0 && (
               <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "rgba(255,255,255,0.3)", fontSize: 12 }}>
                 No assignment graph data available

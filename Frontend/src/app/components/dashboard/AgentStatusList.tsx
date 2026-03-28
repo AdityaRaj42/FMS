@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Bot, Shield, Zap, Brain, Eye, Activity, AlertTriangle } from "lucide-react";
 import { LoadingSkeleton } from "../ui/LoadingSkeleton";
 
-const API = "http://localhost:8000/api/v1";
+const API = "/api/v1";
 
 type AgentStatus = "IDLE" | "MONITORING" | "ACTIVE" | "ALERT";
 
@@ -42,7 +42,7 @@ export function AgentStatusList({ onAlertClick }: { onAlertClick?: (agent?: any)
           );
         }
       })
-      .catch(() => {})
+      .catch(() => { })
       .finally(() => setLoading(false));
   }, []);
 
@@ -85,8 +85,10 @@ export function AgentStatusList({ onAlertClick }: { onAlertClick?: (agent?: any)
                 onMouseLeave={(e) => { e.currentTarget.style.background = isAlert ? "rgba(255,76,76,0.06)" : "rgba(255,255,255,0.02)"; }}
               >
                 <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <div style={{ width: 24, height: 24, borderRadius: 5, background: isAlert ? "rgba(255,76,76,0.15)" : "rgba(0,168,255,0.08)",
-                    display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  <div style={{
+                    width: 24, height: 24, borderRadius: 5, background: isAlert ? "rgba(255,76,76,0.15)" : "rgba(0,168,255,0.08)",
+                    display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0
+                  }}>
                     <Icon size={12} color={isAlert ? "#FF4C4C" : "#00A8FF"} />
                   </div>
                   <div style={{ flex: 1, minWidth: 0 }}>

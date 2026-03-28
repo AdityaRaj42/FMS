@@ -48,7 +48,7 @@ export function AIChat({ isOpen, onToggle }: AIChatProps) {
     setIsTyping(true);
 
     try {
-      const resp = await fetch("http://localhost:8000/api/v1/agent/query", {
+      const resp = await fetch("/api/v1/agent/query", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: text }),

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { LoadingSkeleton } from "../ui/LoadingSkeleton";
 
-const API = "http://localhost:8000/api/v1";
+const API = "/api/v1";
 
 function getColor(value: number): string {
   if (value >= 90) return "#00E676";
@@ -32,7 +32,7 @@ export function WorkforceHeatmap() {
         if (data.shifts) setShifts(data.shifts);
         if (data.stats) setStats(data.stats);
       })
-      .catch(() => {})
+      .catch(() => { })
       .finally(() => setLoading(false));
   }, []);
 
@@ -83,13 +83,17 @@ export function WorkforceHeatmap() {
               const opacity = getOpacity(val);
               return (
                 <div key={ci} className="heatmap-cell" onMouseEnter={() => setHovered({ row: ri, col: ci })} onMouseLeave={() => setHovered(null)}
-                  style={{ flex: 1, height: "100%", minHeight: 24, background: color, opacity: isHov ? 1 : opacity, borderRadius: 3,
+                  style={{
+                    flex: 1, height: "100%", minHeight: 24, background: color, opacity: isHov ? 1 : opacity, borderRadius: 3,
                     position: "relative", display: "flex", alignItems: "center", justifyContent: "center",
                     boxShadow: isHov ? `0 0 10px ${color}80` : "none", transform: isHov ? "scale(1.08)" : "scale(1)",
-                    zIndex: isHov ? 10 : 1, transition: "all 0.15s ease" }}>
+                    zIndex: isHov ? 10 : 1, transition: "all 0.15s ease"
+                  }}>
                   {isHov && (
-                    <div style={{ position: "absolute", bottom: "calc(100% + 4px)", left: "50%", transform: "translateX(-50%)",
-                      background: "rgba(8,12,20,0.95)", border: `1px solid ${color}40`, borderRadius: 4, padding: "3px 6px", whiteSpace: "nowrap", zIndex: 20 }}>
+                    <div style={{
+                      position: "absolute", bottom: "calc(100% + 4px)", left: "50%", transform: "translateX(-50%)",
+                      background: "rgba(8,12,20,0.95)", border: `1px solid ${color}40`, borderRadius: 4, padding: "3px 6px", whiteSpace: "nowrap", zIndex: 20
+                    }}>
                       <span className="tabular" style={{ fontSize: 10, fontWeight: 700, color }}>{val}%</span>
                     </div>
                   )}

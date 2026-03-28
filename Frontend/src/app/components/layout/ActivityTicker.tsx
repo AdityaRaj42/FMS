@@ -6,7 +6,7 @@ const iconMap: Record<string, any> = {
   Bot, Mail, AlertTriangle, Brain, CheckCircle, Zap
 };
 
-const API = "http://localhost:8000/api/v1";
+const API = "/api/v1";
 
 export function ActivityTicker() {
   const [tickerItems, setTickerItems] = useState<any[]>([]);
@@ -78,42 +78,42 @@ export function ActivityTicker() {
       </div>
 
       {/* Scrolling content */}
-        <div className="ticker-wrap" style={{ flex: 1, paddingLeft: 92 }}>
-          {tickerItems.length > 0 ? (
-            <div className="ticker-content" style={{ gap: 0 }}>
-              {doubled.map((item, i) => {
-                const Icon = iconMap[item.icon] || Bot;
-                return (
-                  <div
-                    key={i}
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: 6,
-                      padding: "0 20px",
-                      borderRight: "1px solid rgba(255,255,255,0.06)",
-                    }}
+      <div className="ticker-wrap" style={{ flex: 1, paddingLeft: 92 }}>
+        {tickerItems.length > 0 ? (
+          <div className="ticker-content" style={{ gap: 0 }}>
+            {doubled.map((item, i) => {
+              const Icon = iconMap[item.icon] || Bot;
+              return (
+                <div
+                  key={i}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 6,
+                    padding: "0 20px",
+                    borderRight: "1px solid rgba(255,255,255,0.06)",
+                  }}
+                >
+                  <Icon size={11} color={item.color} />
+                  <span style={{ fontSize: 11, color: "rgba(255,255,255,0.6)", whiteSpace: "nowrap" }}>
+                    {item.text}
+                  </span>
+                  <span
+                    className="tabular"
+                    style={{ fontSize: 10, color: item.color, opacity: 0.7, fontWeight: 600, minWidth: 32 }}
                   >
-                    <Icon size={11} color={item.color} />
-                    <span style={{ fontSize: 11, color: "rgba(255,255,255,0.6)", whiteSpace: "nowrap" }}>
-                      {item.text}
-                    </span>
-                    <span
-                      className="tabular"
-                      style={{ fontSize: 10, color: item.color, opacity: 0.7, fontWeight: 600, minWidth: 32 }}
-                    >
-                      {item.time}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-          ) : (
-            <div style={{ display: "flex", alignItems: "center", height: "100%" }}>
-              <span style={{ fontSize: 11, color: "rgba(255,255,255,0.3)" }}>Loading live activity...</span>
-            </div>
-          )}
-        </div>
+                    {item.time}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div style={{ display: "flex", alignItems: "center", height: "100%" }}>
+            <span style={{ fontSize: 11, color: "rgba(255,255,255,0.3)" }}>Loading live activity...</span>
+          </div>
+        )}
+      </div>
 
       {/* Right fade */}
       <div

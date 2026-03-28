@@ -3,7 +3,7 @@ import { Bot, Zap, Shield, Brain, Eye, Activity, AlertTriangle, Play, Pause, Set
 import { AreaChart, Area, ResponsiveContainer, Tooltip } from "recharts";
 import { LoadingSkeleton } from "../components/ui/LoadingSkeleton";
 
-const API = "http://localhost:8000/api/v1";
+const API = "/api/v1";
 const iconMap: Record<string, any> = { Bot, Zap, Shield, Brain, Eye, Activity, AlertTriangle };
 
 const statusConfig = {
@@ -36,7 +36,7 @@ export function AIAgentsPage() {
         if (d.agents?.length) setAgents(d.agents.map((a: any) => ({ ...a, icon: iconMap[a.icon] || Bot })));
       }),
     ])
-      .catch(() => {})
+      .catch(() => { })
       .finally(() => setLoading(false));
   }, []);
 

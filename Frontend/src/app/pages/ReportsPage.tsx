@@ -3,7 +3,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, L
 import { FileText, TrendingUp, TrendingDown, ChevronDown, ChevronUp } from "lucide-react";
 import { LoadingSkeleton } from "../components/ui/LoadingSkeleton";
 
-const API = "http://localhost:8000/api/v1";
+const API = "/api/v1";
 
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload?.length) {
@@ -34,7 +34,7 @@ export function ReportsPage() {
       fetch(`${API}/reports/kpis`).then(r => r.json()).then(d => { if (d.kpis?.length) setKpis(d.kpis); }),
       fetch(`${API}/reports/generated`).then(r => r.json()).then(d => { if (d.reports?.length) setReports(d.reports); }),
     ])
-      .catch(() => {})
+      .catch(() => { })
       .finally(() => setLoading(false));
   }, []);
 

@@ -5,7 +5,7 @@ import { WorkforceHeatmap } from "../components/dashboard/WorkforceHeatmap";
 import { AgentStatusList } from "../components/dashboard/AgentStatusList";
 import { LoadingSkeleton } from "../components/ui/LoadingSkeleton";
 
-const API = "http://localhost:8000/api/v1";
+const API = "/api/v1";
 
 const iconMap: Record<string, any> = { Users, Activity, Building2, TrendingUp, Calendar, AlertTriangle };
 
@@ -27,7 +27,7 @@ export function CommandDashboard({ onAlertClick }: { onAlertClick?: (agent?: any
           );
         }
       })
-      .catch(() => {})
+      .catch(() => { })
       .finally(() => setLoading(false));
   }, []);
 
