@@ -8,6 +8,7 @@ import { CommandDashboard } from "./pages/CommandDashboard";
 import { WorkforceIntelligence } from "./pages/WorkforceIntelligence";
 import { AIAgentsPage } from "./pages/AIAgentsPage";
 import { ReportsPage } from "./pages/ReportsPage";
+import { SchedulingPage } from "./pages/SchedulingPage";
 
 const pageConfig: Record<string, { breadcrumb: string[]; label: string }> = {
   dashboard: { breadcrumb: ["NexusFM", "Command Dashboard"], label: "Command Dashboard" },
@@ -66,6 +67,8 @@ export default function App() {
         return <AIAgentsPage />;
       case "reports":
         return <ReportsPage />;
+      case "scheduling":
+        return <SchedulingPage />;
       default:
         return <PlaceholderPage title={config.label} />;
     }
