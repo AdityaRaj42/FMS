@@ -11,14 +11,14 @@ import { ReportsPage } from "./pages/ReportsPage";
 import { SchedulingPage } from "./pages/SchedulingPage";
 
 const pageConfig: Record<string, { breadcrumb: string[]; label: string }> = {
-  dashboard: { breadcrumb: ["NexusFM", "Command Dashboard"], label: "Command Dashboard" },
-  workforce: { breadcrumb: ["NexusFM", "Workforce", "Intelligence"], label: "Workforce Intelligence" },
-  clients: { breadcrumb: ["NexusFM", "Clients"], label: "Client Management" },
-  scheduling: { breadcrumb: ["NexusFM", "Scheduling"], label: "Scheduling" },
-  agents: { breadcrumb: ["NexusFM", "AI Agents"], label: "AI Agents" },
-  graph: { breadcrumb: ["NexusFM", "Graph Insights"], label: "Graph Insights" },
-  reports: { breadcrumb: ["NexusFM", "Reports"], label: "Reports" },
-  settings: { breadcrumb: ["NexusFM", "Settings"], label: "Settings" },
+  dashboard: { breadcrumb: ["Enabler.in", "Command Dashboard"], label: "Command Dashboard" },
+  workforce: { breadcrumb: ["Enabler.in", "Workforce", "Intelligence"], label: "Workforce Intelligence" },
+  clients: { breadcrumb: ["Enabler.in", "Clients"], label: "Client Management" },
+  scheduling: { breadcrumb: ["Enabler.in", "Scheduling"], label: "Scheduling" },
+  agents: { breadcrumb: ["Enabler.in", "AI Agents"], label: "AI Agents" },
+  graph: { breadcrumb: ["Enabler.in", "Graph Insights"], label: "Graph Insights" },
+  reports: { breadcrumb: ["Enabler.in", "Reports"], label: "Reports" },
+  settings: { breadcrumb: ["Enabler.in", "Settings"], label: "Settings" },
 };
 
 function PlaceholderPage({ title }: { title: string }) {

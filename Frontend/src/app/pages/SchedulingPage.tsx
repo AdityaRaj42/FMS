@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { 
-  Calendar, 
-  Clock, 
-  MapPin, 
-  Wrench, 
-  CheckCircle2, 
-  AlertCircle, 
-  Users, 
-  BrainCircuit, 
+import {
+  Calendar,
+  Clock,
+  MapPin,
+  Wrench,
+  CheckCircle2,
+  AlertCircle,
+  Users,
+  BrainCircuit,
   Navigation,
   Star,
   Award,
@@ -148,17 +148,26 @@ const WORKER_SUGGESTIONS = [
 export function SchedulingPage() {
   const [selectedTicket, setSelectedTicket] = useState(DUMMY_TICKETS[0]);
   const [isSuggesting, setIsSuggesting] = useState(false);
+  const [loadingStep, setLoadingStep] = useState(0);
   const [suggestions, setSuggestions] = useState<typeof WORKER_SUGGESTIONS | null>(null);
   const [assignedWorker, setAssignedWorker] = useState<string | null>(null);
   const [notification, setNotification] = useState<{ message: string; type: "success" | "info" } | null>(null);
 
   const handleSuggestWorkers = () => {
     setIsSuggesting(true);
-    // Simulate AI inference delay
+    setLoadingStep(0);
+    
+    // Simulate progressive loading steps
+    setTimeout(() => setLoadingStep(1), 600);
+    setTimeout(() => setLoadingStep(2), 1200);
+    setTimeout(() => setLoadingStep(3), 1800);
+    setTimeout(() => setLoadingStep(4), 2400);
+
+    // Simulate final AI inference completion
     setTimeout(() => {
       setSuggestions(WORKER_SUGGESTIONS);
       setIsSuggesting(false);
-    }, 1500);
+    }, 3000);
   };
 
   const handleAssign = (workerName: string) => {
@@ -167,7 +176,7 @@ export function SchedulingPage() {
       message: `Assigned ${workerName} to ${selectedTicket.id}. Supervisor notified for approval.`,
       type: "success"
     });
-    
+
     // Auto-hide notification
     setTimeout(() => {
       setNotification(null);
@@ -176,19 +185,19 @@ export function SchedulingPage() {
 
   return (
     <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "12px 16px", gap: 16, overflow: "hidden" }}>
-      
+
       {/* Header and Notification Area */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexShrink: 0 }}>
         <div>
           <h2 style={{ fontSize: 20, fontWeight: 600, margin: 0, display: "flex", alignItems: "center", gap: 8 }}>
             <Calendar size={20} color="#00A8FF" />
-            Workflow Scheduling - Race Ticket Scenario
+            Workflow Scheduling - Raised Ticket Scenario
           </h2>
           <p style={{ margin: "4px 0 0 0", fontSize: 13, color: "rgba(255,255,255,0.6)" }}>
-            Intelligent assignment and deployment routing for critical racing events.
+            Intelligent assignment and deployment routing for critical events.
           </p>
         </div>
-        
+
         {/* Notification Toast */}
         {notification && (
           <div style={{
@@ -210,16 +219,16 @@ export function SchedulingPage() {
       </div>
 
       <div style={{ flex: 1, display: "flex", gap: 16, minHeight: 0 }}>
-        
+
         {/* Left Column: Tickets List */}
         <div style={{ width: "35%", display: "flex", flexDirection: "column", gap: 12 }}>
           <div style={{ fontSize: 14, fontWeight: 600, color: "rgba(255,255,255,0.8)", marginBottom: 4 }}>
             Pending Executions
           </div>
-          
+
           <div style={{ flex: 1, overflowY: "auto", display: "flex", flexDirection: "column", gap: 8 }}>
             {DUMMY_TICKETS.map(ticket => (
-              <div 
+              <div
                 key={ticket.id}
                 onClick={() => {
                   setSelectedTicket(ticket);
@@ -227,8 +236,8 @@ export function SchedulingPage() {
                   setAssignedWorker(null);
                 }}
                 className="glass-card"
-                style={{ 
-                  padding: 16, 
+                style={{
+                  padding: 16,
                   cursor: "pointer",
                   border: selectedTicket.id === ticket.id ? "1px solid rgba(0,168,255,0.8)" : undefined,
                   background: selectedTicket.id === ticket.id ? "rgba(0,168,255,0.05)" : undefined,
@@ -257,13 +266,13 @@ export function SchedulingPage() {
 
         {/* Right Column: Ticket Details & AI Assignment */}
         <div className="glass-card" style={{ flex: 1, padding: 24, display: "flex", flexDirection: "column", overflowY: "auto" }}>
-          
+
           <div style={{ borderBottom: "1px solid rgba(255,255,255,0.1)", paddingBottom: 16, marginBottom: 20 }}>
             <div style={{ display: "flex", gap: 12, alignItems: "center", marginBottom: 12 }}>
               <span style={{ fontSize: 13, color: "#00A8FF", background: "rgba(0,168,255,0.1)", padding: "4px 10px", borderRadius: 6, fontWeight: 600 }}>
                 {selectedTicket.id}
               </span>
-              <span style={{ fontSize: 13, color: "rgba(255,255,255,0.6)" }}>Status: 
+              <span style={{ fontSize: 13, color: "rgba(255,255,255,0.6)" }}>Status:
                 <span style={{ color: "#fff", marginLeft: 6 }}>{selectedTicket.status.replace("_", " ").toUpperCase()}</span>
               </span>
             </div>
@@ -288,7 +297,7 @@ export function SchedulingPage() {
                 <p style={{ color: "rgba(255,255,255,0.6)", fontSize: 14, marginBottom: 24, textAlign: "center", maxWidth: 300 }}>
                   AI will analyze availability, skills, certifications, and distance to suggest the optimal workforce for this ticket.
                 </p>
-                <button 
+                <button
                   onClick={handleSuggestWorkers}
                   style={{
                     background: "linear-gradient(90deg, #00A8FF 0%, #0077FF 100%)",
@@ -314,21 +323,57 @@ export function SchedulingPage() {
             )}
 
             {isSuggesting && (
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", flex: 1, minHeight: 200 }}>
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyItems: "center", justifyContent: "center", flex: 1, minHeight: 200 }}>
                 <div style={{ width: 40, height: 40, border: "3px solid rgba(0,168,255,0.2)", borderTopColor: "#00A8FF", borderRadius: "50%", animation: "spin 1s linear infinite" }} />
-                <p style={{ marginTop: 16, fontSize: 14, color: "rgba(255,255,255,0.8)", animation: "pulse 1.5s infinite" }}>
-                  Analyzing workforce matrix...
-                </p>
+                
+                <div style={{ marginTop: 24, width: "100%", maxWidth: 320, display: "flex", flexDirection: "column", gap: 0 }}>
+                  {[
+                    "Validating Worker Skills & Certifications",
+                    "Checking Availability & Legal Compliance",
+                    "Calculating Proximity & Travel Feasibility",
+                    "Ranking by Reliability & Cost Fit"
+                  ].map((step, idx, arr) => (
+                    <div key={idx} style={{ 
+                      display: "flex", 
+                      alignItems: "flex-start", 
+                      gap: 12, 
+                      fontSize: 13,
+                      color: loadingStep > idx ? "#10b981" : loadingStep === idx ? "#00A8FF" : "rgba(255,255,255,0.3)",
+                      transition: "color 0.3s",
+                      minHeight: idx < arr.length - 1 ? 40 : "auto"
+                    }}>
+                      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 16 }}>
+                        {loadingStep > idx ? (
+                          <CheckCircle2 size={16} color="#10b981" style={{ flexShrink: 0 }} />
+                        ) : loadingStep === idx ? (
+                          <div style={{ flexShrink: 0, width: 14, height: 14, borderRadius: "50%", border: "2px solid #00A8FF", borderTopColor: "transparent", animation: "spin 1s linear infinite" }} />
+                        ) : (
+                          <div style={{ flexShrink: 0, width: 14, height: 14, borderRadius: "50%", border: "2px solid rgba(255,255,255,0.3)" }} />
+                        )}
+                        {idx < arr.length - 1 && (
+                          <div style={{
+                            width: 2, 
+                            height: 24,
+                            marginTop: 4,
+                            background: loadingStep > idx ? "#10b981" : "rgba(255,255,255,0.1)",
+                            transition: "background 0.3s"
+                          }} />
+                        )}
+                      </div>
+                      <span style={{ fontWeight: loadingStep >= idx ? 500 : 400, marginTop: loadingStep > idx ? 0 : -1 }}>{step}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
 
             {suggestions && !assignedWorker && (
               <div style={{ display: "flex", flexDirection: "column", gap: 12, animation: "fadeIn 0.4s ease-out" }}>
                 {suggestions.map((worker, index) => (
-                  <div key={worker.id} style={{ 
-                    background: "rgba(0,0,0,0.2)", 
-                    border: "1px solid rgba(255,255,255,0.05)", 
-                    borderRadius: 12, 
+                  <div key={worker.id} style={{
+                    background: "rgba(0,0,0,0.2)",
+                    border: "1px solid rgba(255,255,255,0.05)",
+                    borderRadius: 12,
                     padding: 16,
                     display: "flex",
                     flexDirection: "column",
@@ -336,23 +381,23 @@ export function SchedulingPage() {
                   }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                       <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                        <div style={{ 
-                          width: 40, height: 40, borderRadius: "50%", 
+                        <div style={{
+                          width: 40, height: 40, borderRadius: "50%",
                           background: index === 0 ? "linear-gradient(135deg, #10b981 0%, #059669 100%)" : "rgba(255,255,255,0.1)",
-                          display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, fontWeight: 700 
+                          display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, fontWeight: 700
                         }}>
                           {worker.name.charAt(0)}
                         </div>
                         <div>
                           <div style={{ fontSize: 15, fontWeight: 600, display: "flex", alignItems: "center", gap: 8 }}>
-                            {worker.name} 
+                            {worker.name}
                             {index === 0 && <span style={{ fontSize: 10, background: "rgba(16, 185, 129, 0.2)", color: "#10b981", padding: "2px 6px", borderRadius: 4 }}>BEST MATCH {worker.matchScore}%</span>}
                           </div>
                           <div style={{ fontSize: 12, color: "rgba(255,255,255,0.5)" }}>{worker.role}</div>
                         </div>
                       </div>
-                      
-                      <button 
+
+                      <button
                         onClick={() => handleAssign(worker.name)}
                         style={{
                           background: index === 0 ? "#10b981" : "rgba(255,255,255,0.1)",
@@ -383,16 +428,16 @@ export function SchedulingPage() {
                         <Star size={14} color="#00A8FF" /> Rating: <span style={{ color: "#fff" }}>{worker.rating}</span>
                       </div>
                     </div>
-                    
+
                     <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                       <div style={{ fontSize: 12, display: "flex", alignItems: "center", gap: 6, color: "rgba(255,255,255,0.7)" }}>
-                        <Wrench size={12} /> Skills: 
+                        <Wrench size={12} /> Skills:
                         <div style={{ display: "flex", gap: 4, flexWrap: "wrap", marginLeft: 4 }}>
                           {worker.skills.map(s => <span key={s} style={{ background: "rgba(255,255,255,0.06)", padding: "2px 6px", borderRadius: 4, fontSize: 11 }}>{s}</span>)}
                         </div>
                       </div>
                       <div style={{ fontSize: 12, display: "flex", alignItems: "center", gap: 6, color: "rgba(255,255,255,0.7)" }}>
-                        <Award size={12} /> Certs: 
+                        <Award size={12} /> Certs:
                         <div style={{ display: "flex", gap: 4, flexWrap: "wrap", marginLeft: 4 }}>
                           {worker.certifications.map(c => <span key={c} style={{ background: "rgba(16, 185, 129, 0.1)", color: "#10b981", padding: "2px 6px", borderRadius: 4, fontSize: 11 }}>{c}</span>)}
                         </div>
@@ -410,7 +455,7 @@ export function SchedulingPage() {
                 <p style={{ color: "rgba(255,255,255,0.8)", fontSize: 14, marginBottom: 24, textAlign: "center", maxWidth: 350 }}>
                   <strong>{assignedWorker}</strong> has been assigned to this ticket. A notification has been sent to the supervisor for final approval.
                 </p>
-                <button 
+                <button
                   onClick={() => {
                     setAssignedWorker(null);
                     setSuggestions(null);
@@ -433,7 +478,7 @@ export function SchedulingPage() {
           </div>
         </div>
       </div>
-      
+
       {/* Required Keyframes */}
       <style>{`
         @keyframes spin {
