@@ -9,6 +9,7 @@ import { WorkforceIntelligence } from "./pages/WorkforceIntelligence";
 import { AIAgentsPage } from "./pages/AIAgentsPage";
 import { ReportsPage } from "./pages/ReportsPage";
 import { SchedulingPage } from "./pages/SchedulingPage";
+import { GraphInsightsPage } from "./pages/GraphInsightsPage";
 
 const pageConfig: Record<string, { breadcrumb: string[]; label: string }> = {
   dashboard: { breadcrumb: ["Enabler.in", "Command Dashboard"], label: "Command Dashboard" },
@@ -69,6 +70,8 @@ export default function App() {
         return <ReportsPage />;
       case "scheduling":
         return <SchedulingPage />;
+      case "graph":
+        return <GraphInsightsPage />;
       default:
         return <PlaceholderPage title={config.label} />;
     }
